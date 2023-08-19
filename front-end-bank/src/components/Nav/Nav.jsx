@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export default function Nav() {
     return(
         <nav className="main-nav">
-            <Link className="main-nav-logo" to="./index.html">
+            <Link className="main-nav-logo" to="/">
                 <img
                     className="main-nav-logo-image"
                     src="../../assets/img/argentBankLogo.png"
@@ -12,14 +13,14 @@ export default function Nav() {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
-                <Link className="main-nav-item" to="./user.html">
+                <Link className="main-nav-item" to="/sign-in">
                     <i className="fa fa-user-circle" />
                     Tony
                 </Link>
-                <a className="main-nav-item" to="./index.html">
+                <Link className="main-nav-item" to="/home">
                     <i className="fa fa-sign-out" />
                     Sign Out
-                </a>
+                </Link>
             </div>
         </nav>
     )
