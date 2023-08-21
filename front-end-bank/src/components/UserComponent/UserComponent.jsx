@@ -1,7 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function UserComponent() {
+    const dispatch = useDispatch();
     return(
         <>
             <nav className="main-nav">
