@@ -7,14 +7,13 @@ export const loginUser = async (email, password) => {
         email: email,
         password: password,
     });
+    let data = {
+        email: email,
+        password: password,
+    };
     try {
-        const response = await axios.post(
-            `${baseUrl}/user/login`,
-            {
-                email: email,
-                password: password,
-            }
-        );
+        const response = await axios.post(`${baseUrl}/user/login`,data);
+        console.log(response);
         const jwtToken = response.data.body.token;
         // ou
         // const jwtToken = localStorage.getItem('jwtToken');
@@ -22,11 +21,15 @@ export const loginUser = async (email, password) => {
         return jwtToken;
     } catch (error) {
         console.error("Erreur de connexion à:", error);
-        if (error.response.status === 404) {
-            console.error(error.message);
-            alert(error.message);
-        } else if (error.response.status === 500) {
-            alert('Internal server error');
+        if (error.response) {
+            if (error.response.status === 404) {
+                console.error(error.message);
+                alert(error.message);
+            } else if (error.response.status === 500) {
+                alert('Internal server error');
+            }
+        }else {
+            // alert(error.message);
         }
     }
 }

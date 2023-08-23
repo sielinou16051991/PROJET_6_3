@@ -68,9 +68,16 @@ export default function SignInComponent(){
         }
 
         try {
-            const token = await dispatch(loginUser({email, password})).unwrap();
+            console.log('token');
+            // console.log({email, password});
+            const token = await dispatch(loginUser({email, password})).unwrap(); // connexion de l'utilisateur et attente du jeton
+                                                                                    // "token" correspondant aux parametres {email, password}
+            // console.log(token);
             localStorage.setItem('jwtToken', token);  // envoi des parametres de connexion dans le localStorage
             await dispatch(fetchUserProfile(token)).unwrap();
+            // if (token) {
+            //     navigate("/user");
+            // }
             navigate("/user");
             console.log(token);
             if (rememberMe) {
@@ -117,7 +124,6 @@ export default function SignInComponent(){
                                 type="text"
                                 id="username"
                                 value={email}
-                                autocomplete='new-email'
                                 onChange={handleEmailChange}
                             />
                         </div>

@@ -1,5 +1,9 @@
 import {Link} from "react-router-dom";
 import React from "react";
+import ArgentBankLogo from "../../assets/img/ArgentBankLogo.svg"
+import IconChat from "../../assets/img/IconChat.svg"
+import IconMoney from "../../assets/img/IconMoney.svg"
+import IconSecurity from "../../assets/img/IconSecurity.svg"
 
 export default function HomeComponent() {
     return(
@@ -8,7 +12,7 @@ export default function HomeComponent() {
                 <Link className="main-nav-logo" to="/">
                     <img
                         className="main-nav-logo-image"
-                        src="../../assets/img/argentBankLogo.png"
+                        src={ArgentBankLogo}
                         alt="Argent Bank Logo"
                     />
                     <h1 className="sr-only">Argent Bank</h1>
@@ -33,7 +37,7 @@ export default function HomeComponent() {
                 <section className="features">
                     <h2 className="sr-only">Features</h2>
                     <div className="feature-item">
-                        <img src="../../assets/img/icon-chat.png" alt="Chat Icon" className="feature-icon"/>
+                        <img src={IconChat} alt="Chat Icon" className="feature-icon"/>
                         <h3 className="feature-item-title">You are our #1 priority</h3>
                         <p>
                             Need to talk to a representative? You can get in touch through our
@@ -42,7 +46,7 @@ export default function HomeComponent() {
                     </div>
                     <div className="feature-item">
                         <img
-                            src="../../assets/img/icon-money.png"
+                            src={IconMoney}
                             alt="Chat Icon"
                             className="feature-icon"
                         />
@@ -53,7 +57,7 @@ export default function HomeComponent() {
                     </div>
                     <div className="feature-item">
                         <img
-                            src="../../assets/img/icon-security.png"
+                            src={IconSecurity}
                             alt="Chat Icon"
                             className="feature-icon"
                         />

@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
+import ArgentBankLogo from "../../assets/img/ArgentBankLogo.svg"
 
 export default function UserComponent() {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export default function UserComponent() {
                 <Link className="main-nav-logo" to="/user">
                     <img
                         className="main-nav-logo-image"
-                        src="../../assets/img/argentBankLogo.png"
+                        src={ArgentBankLogo}
                         alt="Argent Bank Logo"
                     />
                     <h1 className="sr-only">Argent Bank</h1>
