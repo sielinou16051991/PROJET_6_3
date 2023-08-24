@@ -1,4 +1,4 @@
-import { loginUser as loginUserApi } from "../../api/ApiService";
+import {loginUser as loginUserApi, updateProfileApi} from "../../api/ApiService";
 import { getUserProfile as getUserProfileApi} from "../../api/ApiService";
 
 /**
@@ -28,5 +28,23 @@ export const fetchUserProfile = createAsyncThunk(
     async (token) => {
         const userProfile = await getUserProfileApi(token); // récupération du profile de l'utilisateur
         return userProfile;
+    }
+)
+/**
+ * Mise à jour du profile de l'utilisateur
+ * @param {string}
+ */
+
+export const updateUserProfile = createAsyncThunk(
+    "user/updatedUserProfile",
+    async ({token, updatedProfile}, rejectWithValue) => {
+        try {
+            console.log(updatedProfile);
+            const userProfile = await updateProfileApi(token, updatedProfile);
+            return userProfile;
+        } catch (err) {
+            console.log(err);
+            return rejectWithValue(err.message);
+        }
     }
 )

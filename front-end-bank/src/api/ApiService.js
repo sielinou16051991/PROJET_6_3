@@ -22,8 +22,8 @@ export const loginUser = async (email, password) => {
     } catch (error) {
         console.error("Erreur de connexion à:", error);
         if (error.response) {
-            if (error.response.status === 404) {
-                console.error(error.message);
+            if (error.response.status === 400) {
+                console.error("Invalid fields",error.message);
                 alert(error.message);
             } else if (error.response.status === 500) {
                 alert('Internal server error');
@@ -58,6 +58,28 @@ export const getUserProfile = async (jwtToken) => {
             message: error.response ? error.response.data.message : null,
             body: null,
         };
+    }
+};
+
+export const updateProfileApi = async (jwtToken, updatedProfile) => {
+    try {
+        const response = await axios.put(
+            `${baseUrl}/user/profile`,
+            updatedProfile,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                },
+            }
+        );
+        console.log(response);
+        if (response.status !== 200) {
+            alert('Erreur lors de la mise a jour du profile');
+            throw new Error("Erreur lors de la mise a jour du profile");
+        }
+        return response.data.body;
+    } catch (error) {
+        console.error(error);
     }
 };
 

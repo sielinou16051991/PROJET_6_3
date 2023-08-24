@@ -1,68 +1,88 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+// import ArgentBankLogo from "../../assets/img/ArgentBankLogo.svg"
 import ArgentBankLogo from "../../assets/img/ArgentBankLogo.svg"
+import LogOut from "../LogOut";
+import Nav from "../Nav/Nav";
+import {useNavigate} from "react-router";
+import {fetchUserProfile, updateUserProfile} from "../../store/actions/userActions";
+import EditableName from "../EditableName/EditableName";
+import dataAccount from "../../data/DataAccount"
+import Account from "../Account/Account";
 
 export default function UserComponent() {
+    const profile = useSelector((state) => state.user.profile);
+    const error = useSelector((state) => state.user.error);
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [displayName, setDisplayName] = useState("");
+
+    // met a jour le nom d'utilisateur lors de l'affichage du profile
+    useEffect(() => {
+        if (profile) {
+            setDisplayName(profile.fullName);
+        }
+    }, [profile]);
+    /**
+     * Met à jour le nom de l'utilisateur dans le profile.
+     * @param {}
+     *
+     */
+    const handleNameUpdate = async (newName) => {
+        const jwtToken = localStorage.getItem('jwtToken');
+        const updatedProfile = {
+            firstName: newName.split(" ")[0],
+            lastName: newName.split(" ")[1],
+        };
+
+        // appel de l'action "updateUserProfile" pour mettre à jour le profile de l'utilisateur
+        // avec les nouvelles informations (updatedProfile) en utilisant le token JWT
+        dispatch(updateUserProfile({ token: jwtToken, updatedProfile }));
+        setDisplayName(newName);
+    }
+
+    useEffect(() => {
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            // si l'utilisateur n'est pas connecté (pas de token JWT trouvé), rediriger vers la page de connexion
+            navigate("/user")
+        }else{
+            dispatch(fetchUserProfile(jwtToken))
+        }
+    }, [dispatch, navigate]);
     return(
         <>
-            <nav className="main-nav">
-                <Link className="main-nav-logo" to="/user">
-                    <img
-                        className="main-nav-logo-image"
-                        src={ArgentBankLogo}
-                        alt="Argent Bank Logo"
-                    />
-                    <h1 className="sr-only">Argent Bank</h1>
-                </Link>
-                <div>
-                    <Link className="main-nav-item" to="/user">
-                        <i className="fa fa-user-circle" />
-                        Tony
-                    </Link>
-                    <Link className="main-nav-item" to="/">
-                        <i className="fa fa-sign-out" />
-                        Sign Out
-                    </Link>
-                </div>
-            </nav>
-            <main className="main bg-dark">
+            <Nav showLogOut={true} displayName={displayName} />
+            <main className="main bg-dark user_main-top">
                 <div className="header">
-                    <h1>Welcome back<br/>Tony Jarvis!</h1>
-                    <button className="edit-button">Edit Name</button>
+                    <h1>Welcome back<br/>
+                    <p className="name-font-size">
+                        {displayName}!
+                    </p><br />
+                        {profile && (
+                            <EditableName
+                                fullName={profile.fullName}
+                                onSave={handleNameUpdate}
+                                />
+                        )}
+                    </h1>
+                    {/*<button className="edit-button">Edit Name</button>*/}
                 </div>
                 <h2 className="sr-only">Accounts</h2>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                        <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-                        <p className="account-amount">$2,082.79</p>
-                        <p className="account-amount-description">Available Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                        <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                        <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-                        <p className="account-amount">$10,928.42</p>
-                        <p className="account-amount-description">Available Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                        <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                        <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-                        <p className="account-amount">$184.30</p>
-                        <p className="account-amount-description">Current Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                        <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
+
+                {dataAccount.map((item, index) =>
+                        (<Account
+                            key={index}
+                            title={item.title}
+                            accountNumber={item.accountNumber}
+                            accountPrice={item.accountPrice}
+                            subTitle={item.subTitle}
+
+                        />)
+                )}
+
             </main>
         </>
     )
