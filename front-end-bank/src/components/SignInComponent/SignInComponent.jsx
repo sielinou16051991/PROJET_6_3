@@ -149,7 +149,7 @@ export default function SignInComponent(){
                         >
                         </div>
                         {/*// <!-- PLACEHOLDER DUE TO STATIC SITE -->*/}
-                        {messageError && <p>{messageError}</p>}
+                        {messageError && <p className="error-message">{messageError}</p>}
                         <button type="submit" className="sign-in-button">Sign In</button>
                         {error && <p className="error-message">{error}</p>}
                         {/*// <!-- SHOULD BE THE BUTTON BELOW -->*/}
