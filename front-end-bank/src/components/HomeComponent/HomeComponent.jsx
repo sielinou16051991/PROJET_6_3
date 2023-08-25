@@ -4,8 +4,13 @@ import ArgentBankLogo from "../../assets/img/ArgentBankLogo.svg"
 import IconChat from "../../assets/img/IconChat.svg"
 import IconMoney from "../../assets/img/IconMoney.svg"
 import IconSecurity from "../../assets/img/IconSecurity.svg"
+import {logoutUser} from "../../store/reducer/userReducer";
+import {useDispatch} from "react-redux";
 
 export default function HomeComponent() {
+    const dispatch = useDispatch()
+    dispatch(logoutUser());
+    localStorage.removeItem('jwtToken');
     return(
         <>
             <nav className="main-nav">

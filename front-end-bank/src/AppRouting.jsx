@@ -8,15 +8,26 @@ import Footer from "./components/Footer/Footer";
 import HomeComponent from "./components/HomeComponent/HomeComponent";
 import SignInComponent from "./components/SignInComponent/SignInComponent";
 import UserComponent from "./components/UserComponent/UserComponent";
+import NotFound from "./components/NotFound/NotFound";
 
 export default function AppRouting () {
+    const token = localStorage.getItem("jwtToken");
     return (
         <div className="App">
             {/*<Nav />*/}
             <Routes>
                 <Route path="/" element={<HomeComponent />} />
-                <Route path="/sign-in" element={<SignInComponent />} />
-                <Route path="/user" element={<UserComponent />} />
+                {token ? (
+                    <>
+                        <Route path="/user" element={<UserComponent />} />
+                        <Route path="/sign-in" element={<SignInComponent />} />
+                        </>
+                ) : (
+                    <>
+                        <Route path="/sign-in" element={<SignInComponent />} />
+                    </>
+                    )}
+                <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
         </div>

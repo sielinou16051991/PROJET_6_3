@@ -52,7 +52,7 @@ export const getUserProfile = async (jwtToken) => {
             body: response.data.body,
         };
     } catch (error) {
-        console.log("Error lors du fetching du profile de l'utilisateur", error);
+        console.error("Error lors du fetching du profile de l'utilisateur", error);
         return {
             status: error.response ? error.response.status : null,
             message: error.response ? error.response.data.message : null,

@@ -19,6 +19,17 @@ export default function UserComponent() {
     const navigate = useNavigate();
     const [displayName, setDisplayName] = useState("");
 
+    console.log(profile);
+
+    // if (profile.body) {
+    //     const firstName = profile.body.firstName;
+    //     const lastName = profile.body.lastName;
+    // }
+
+    // const handleGetUser = () => {
+    //
+    // }
+
     // met a jour le nom d'utilisateur lors de l'affichage du profile
     useEffect(() => {
         if (profile) {
@@ -27,7 +38,7 @@ export default function UserComponent() {
     }, [profile]);
     /**
      * Met à jour le nom de l'utilisateur dans le profile.
-     * @param {}
+     * @param {*}
      *
      */
     const handleNameUpdate = async (newName) => {
@@ -48,18 +59,20 @@ export default function UserComponent() {
         if (!jwtToken) {
             // si l'utilisateur n'est pas connecté (pas de token JWT trouvé), rediriger vers la page de connexion
             navigate("/user")
+            // dispatch(fetchUserProfile(jwtToken))
         }else{
             dispatch(fetchUserProfile(jwtToken))
         }
     }, [dispatch, navigate]);
     return(
         <>
-            <Nav showLogOut={true} displayName={displayName} />
+            <Nav showLogOut={true} displayName={displayName ? displayName : (profile ? `${profile.body.firstName} ${profile.body.lastName}` : "")} />
+            {error && <p className="error-message">Error: {error}</p>}
             <main className="main bg-dark user_main-top">
                 <div className="header">
                     <h1>Welcome back<br/>
                     <p className="name-font-size">
-                        {displayName}!
+                        {displayName ? displayName : (profile ? `${profile.body.firstName} ${profile.body.lastName}` : "")}!
                     </p><br />
                         {profile && (
                             <EditableName

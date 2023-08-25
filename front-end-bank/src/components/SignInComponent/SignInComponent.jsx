@@ -37,7 +37,7 @@ export default function SignInComponent(){
         if (localStorage.getItem('jwtToken') === 'true') {
             const storedEmail = localStorage.getItem('email');
             const storedPassword = localStorage.getItem('password');
-            console.log(localStorage.getItem('email'));
+            // console.log(localStorage.getItem('email'));
             if (storedEmail) setEmail(storedEmail);
             if (storedPassword) setPassword(storedPassword);
             setRememberMe(false);
@@ -51,6 +51,7 @@ export default function SignInComponent(){
 
     const handleSubmit = async (event) => {
         console.log(event.preventDefault());
+        event.preventDefault()
 
         const connexionCredentials = {
             'tony@stark.com': 'password123',
