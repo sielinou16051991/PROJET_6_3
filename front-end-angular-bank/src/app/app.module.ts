@@ -12,6 +12,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { UserComponent } from './components/user/user.component';
 import { LogOutComponent } from './components/log-out/log-out.component';
+import {HttpClientModule} from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { HeaderComponent } from './components/header/header.component';
+import { CardHomeComponent } from './components/card-home/card-home.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +28,15 @@ import { LogOutComponent } from './components/log-out/log-out.component';
     NotFoundComponent,
     SignInComponent,
     UserComponent,
-    LogOutComponent
+    LogOutComponent,
+    HeaderComponent,
+    CardHomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,15 +10,14 @@ import {environment} from '../../../environments/environment';
 export class SignInComponent implements OnInit {
 
   constructor(
-    private genericsService: GenericsService
   ) { }
 
   ngOnInit(): void {
-    this.genericsService.getResource(`${environment.baseUrl}/api/v1`).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.error(error);
-    });
+    // this.genericsService.getResource(`${environment.baseUrl}/api/v1`).then((response) => {
+    //   console.log(response);
+    // }).catch((error) => {
+    //   console.error(error);
+    // });
   }
 
 }

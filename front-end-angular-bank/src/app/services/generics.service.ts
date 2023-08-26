@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {DomSanitizer} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -9,8 +8,6 @@ import {environment} from '../../environments/environment';
 export class GenericsService {
   constructor(
     private http: HttpClient,
-    private location: Location,
-    private sanitizer: DomSanitizer
   ){}
 
   // tslint:disable-next-line:typedef

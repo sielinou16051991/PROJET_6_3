@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GenericsService} from '../../services/generics.service';
-// import {useDispatch, useSelector} from '@angular-redux/store';
+import {data} from '../../../data/dataAccount';
+
 
 @Component({
   selector: 'app-user',
@@ -9,6 +10,7 @@ import {GenericsService} from '../../services/generics.service';
 })
 export class UserComponent implements OnInit {
 
+  public dataAccount: any;
   // public profile = useSelector((state) => state.user.profile);
   // public error = useSelector((state) => state.user.error);
 
@@ -17,9 +19,11 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.genericsService.getResource('http://localhost:3001/api/v1').then((response) => {
-      console.log(response);
-    });
+    // this.genericsService.getResource('/user/profile').then((response) => {
+    //   console.log(response);
+    // });
+    this.dataAccount = data;
+    console.log(this.dataAccount);
   }
 
 }

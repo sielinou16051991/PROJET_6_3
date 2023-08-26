@@ -1,4 +1,4 @@
-const dataAccount = [
+export const data = [
     {
         title: 'Argent Bank Checking',
         accountNumber: 'x8349',
@@ -17,5 +17,4 @@ const dataAccount = [
         accountPrice: '$184.30',
         subTitle: 'Current Balance'
     }
-]
-export default dataAccount;
+];

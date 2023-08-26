@@ -1,1 +1,21 @@
-<p>user</p>
+<app-header></app-header>
+<main class="main bg-dark">
+  <div class="header">
+    <h1>Welcome back<br />Tony Jarvis!</h1>
+    <button class="edit-button">Edit Name</button>
+  </div>
+  <h2 class="sr-only">Accounts</h2>
+  <ng-container>
+    <section class="account" *ngFor="let item of dataAccount">
+      <div class="account-content-wrapper">
+        <h3 class="account-title">{{item.title}} &nbsp;&nbsp; ({{item.accountNumber}})</h3>
+        <p class="account-amount">{{item.accountPrice}}</p>
+        <p class="account-amount-description">{{item.subTitle}}</p>
+      </div>
+      <div class="account-content-wrapper cta">
+        <button class="transaction-button">View transactions</button>
+      </div>
+    </section>
+  </ng-container>
+</main>
+<app-footer></app-footer>
