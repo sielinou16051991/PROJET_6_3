@@ -16,7 +16,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { HeaderComponent } from './components/header/header.component';
 import { CardHomeComponent } from './components/card-home/card-home.component';
+import {metaReducers, rootReducer} from './state/00-reduser';
+import rooterReducer from './store/reducer/rooterReducer';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,12 @@ import { CardHomeComponent } from './components/card-home/card-home.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({
+      rootExp: rootReducer,
+      root: rooterReducer
+    }, {
+      metaReducers
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
