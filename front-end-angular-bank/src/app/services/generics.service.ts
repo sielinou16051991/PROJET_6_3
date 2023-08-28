@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
+import {Observable, OperatorFunction, throwError} from 'rxjs';
+import {TypedAction} from '@ngrx/store/src/models';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class GenericsService {
   }
 
   // tslint:disable-next-line:typedef
-  public putResource(url: string, dto: any) {
-    return this.http.put(`${this.baseUrl + url}`, dto).toPromise();
+  public putResource(url: string) {
+    return this.http.put(`${this.baseUrl + url}`).toPromise();
   }
 
   // tslint:disable-next-line:typedef
@@ -34,11 +35,7 @@ export class GenericsService {
     return this.http.delete(`${this.baseUrl}`).toPromise();
   }
 
-  loginUser(email: string, password: string): Observable<string> {
-    const data = {
-      email: email,
-      password: password,
-    };
+  loginUser(data: any): Observable<string> {
     const response = this.http
       .post<any>(`${this.baseUrl}/user/login`, data)
       .pipe(
@@ -47,6 +44,12 @@ export class GenericsService {
           return throwError(error);
         })
       );
+    const name = {
+      name: 'SSIELINOU',
+      firstName: 'ERIC'
+    };
+    localStorage.setItem('name', JSON.stringify(name));
+    console.log(localStorage.getItem('name'));
     console.log(response);
     return response;
   }

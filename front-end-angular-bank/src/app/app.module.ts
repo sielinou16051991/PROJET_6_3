@@ -14,12 +14,19 @@ import { UserComponent } from './components/user/user.component';
 import { LogOutComponent } from './components/log-out/log-out.component';
 import {HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { HeaderComponent } from './components/header/header.component';
 import { CardHomeComponent } from './components/card-home/card-home.component';
-// import {metaReducers, rootReducer} from './state/00-reduser';
 // import rooterReducer from './store/reducer/rooterReducer';
-import {AppState, reducers} from './store/reducer';
+import {reducers} from './store/reducer';
+// import {metaReducers} from './state/00-reduser';
+import {metaReducers} from './store/reducer/index';
+import {Effects} from './store/effets';
 
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 // @ts-ignore
 @NgModule({
   declarations: [
@@ -40,7 +47,14 @@ import {AppState, reducers} from './store/reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, {})
+    EffectsModule.forRoot(Effects),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true,
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

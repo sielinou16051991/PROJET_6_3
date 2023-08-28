@@ -18,10 +18,12 @@ export interface State {
   // },
 }
 // @ts-ignore
-// @ts-ignore
 export const initialState: State = {
     name: 'user',
-    profile: [],
+    profile: [{
+      email: '',
+      password: ''
+    }],
     error: {
       error: '',
       message: '',
@@ -33,7 +35,7 @@ export const initialState: State = {
 // @ts-ignore
 const loginReducer = createReducer(
   initialState,
-  on(loginUser, (state) => {
+  on(loginUser, (state: any) => {
     return { ...state, isLoggedIn: false};
   }),
   on(loginUserSuccess, (state: any, payload: any ) => {
@@ -53,5 +55,13 @@ export const featureKey = 'user';
 
 const userState = createFeatureSelector(featureKey);
 
+export const getloginSelector = createSelector(
+  userState,
+  (state: any) => state.isLoggedIn
+);
+
+
 // @ts-ignore
-export const getDataSelector = createSelector(userState, (state: any,) => state.data);
+export const getDataSelector = createSelector(userState, (item: any) => item);
+
+// console.log(getDataSelector)
