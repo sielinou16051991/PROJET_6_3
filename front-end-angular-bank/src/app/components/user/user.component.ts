@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updateUser(this.data);
+    this.updateUser('this.data');
     this.profile$ = this.stateServiceService.userProfile$;
     console.log(this.profile$);
     this.initUser();
@@ -70,7 +70,7 @@ export class UserComponent implements OnInit {
    */
   // tslint:disable-next-line:typedef
   updateUser(dto: any) {
-    this.genericsService.putResource('/user/profile', dto).then((response) => {
+    this.genericsService.putResource(`/user/profile${dto}`,).then((response) => {
       console.log(response);
     });
   }

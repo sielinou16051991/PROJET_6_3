@@ -27,6 +27,7 @@ export class GenericsService {
 
   // tslint:disable-next-line:typedef
   public putResource(url: string) {
+    // @ts-ignore
     return this.http.put(`${this.baseUrl + url}`).toPromise();
   }
 
