@@ -1,11 +1,20 @@
 
 <div>
-  <a class="main-nav-item" routerLink="/user">
+  <a  *ngIf="(url === '/user')"
+    class="main-nav-item" routerLink="/user">
     <i class="fa fa-user-circle"></i>
-    Tony
+    {{firstName}} &nbsp;&nbsp; {{lastName}}
   </a>
-  <a class="main-nav-item" routerLink="/">
+  <button *ngIf="url != '/'"
+    class="main-nav-item btn-decoration-none"
+          (click)="handelerLogOut()">
     <i class="fa fa-sign-out"></i>
     Sign Out
-  </a>
+  </button>
+  <button *ngIf="url === '/'"
+    class="main-nav-item btn-decoration-none"
+          (click)="handelerSignIn()">
+    <i class="fa fa-user-circle"></i>
+    Sign In
+  </button>
 </div>

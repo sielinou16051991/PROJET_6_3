@@ -22,6 +22,7 @@ import {reducers} from './store/reducer';
 // import {metaReducers} from './state/00-reduser';
 import {metaReducers} from './store/reducer/index';
 import {Effects} from './store/effets';
+import {FormsModule} from '@angular/forms';
 
 // @ts-ignore
 // @ts-ignore
@@ -55,6 +56,7 @@ import {Effects} from './store/effets';
         strictStateImmutability: true,
       },
     }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

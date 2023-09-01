@@ -4,25 +4,18 @@ info:
   description: Contains all available API endpoints in this codebase
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'
-host: localhost:3001
+host: localhost:4200
 basePath: /api/v1
 schemes:
   - http
 # API permettant de lister les utilisateurs
 paths:
-  /user/login:
+  /user/lists:
     get:
       tags:
         - User Module
       summary: ListUsers
       description: API for Users List
-      parameters:
-        - in: body
-          name: body
-          description: List Users Payload
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsers'
       produces:
         - application/json
       responses:
@@ -34,78 +27,25 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-################################ API ................
-  /user/signup:
+################################ API permettant d'enregistrer une ARGENTBANK................
+  /argentBank/register:
     post:
       tags:
-        - User Module
-      summary: Signup
-      description: API for Signup
+        - Argent Bank Module
+      summary: Register
+      description: API for Register Argent Bank
       parameters:
         - in: body
           name: body
-          description: Signup Payload
+          description: Register Payload
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/register'
       produces:
         - application/json
       responses:
         '200':
-          description: Signup Successfully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/profile:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for fetching a user profile
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User profile retrieved successully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating a user profile
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: body
-          name: body
-          description: Update user profile attributes
-          required: true
-          schema:
-            $ref: '#/definitions/UserProfile'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User profile retrieved successully
+          description: Register Successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -118,28 +58,20 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  User:
+  register:
     properties:
-      email:
+      title:
         type: string
-        description: user email
-      password:
+        description: Argent Bank Title
+      accountNumber:
+        type: number
+        description: Argent Bank Account Number
+      accountPrice:
+        type: number
+        description: Argent Bank Account Price
+      subTitle:
         type: string
-        description: user password
-      firstName:
-        type: string
-        description: user first name
-      lastName:
-        type: string
-        description: user last name
-  Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
+        description: Argent Bank sub title
   ApiResponse:
     type: object
     properties:
@@ -152,17 +84,3 @@ definitions:
         properties:
           id:
             type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  UserProfile:
-    type: object
-    properties:
-      firstName:
-        type: string
-      lastName:
-        type: string

@@ -13,3 +13,24 @@ export class LoginModel {
   ) {
   }
 }
+// Post /user/login
+export class LoginPayload {
+  constructor(
+    public email: string,
+    public password: string) {
+  }
+}
+
+// Post /user/signup
+export const Signup = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+}
+
+// Put /user/profile
+export const UpdateUserProfileAttributes = {
+  firstName: '',
+  lastName: '',
+}

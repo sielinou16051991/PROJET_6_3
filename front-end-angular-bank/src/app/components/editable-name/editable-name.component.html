@@ -1,1 +1,23 @@
-<p>editable-name works!</p>
+
+<div>
+  <div class="input-container">
+    <label>
+      <input
+        type="text"
+        placeholder="Tony"
+        [(ngModel)]="inputFirstName"
+      />
+    </label>
+    <label>
+      <input
+        type="text"
+        placeholder="Tony"
+        [(ngModel)]="inputLastName"
+      />
+    </label>
+  </div>
+  <div class="button-container">
+    <button class="edit-button" (click)="handleSave()">Save</button>
+    <button class="edit-button" (click)="handleCancel()">Cancel</button>
+  </div>
+</div>

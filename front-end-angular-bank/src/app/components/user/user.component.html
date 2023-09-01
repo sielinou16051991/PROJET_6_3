@@ -1,8 +1,14 @@
-<app-header></app-header>
+<app-header [lastName]="lastName" [firstName]="firstName" ></app-header>
 <main class="main bg-dark">
   <div class="header">
-    <h1>Welcome back<br />Tony Jarvis!</h1>
-    <button class="edit-button">Edit Name</button>
+    <h1>Welcome back<br />{{firstName}} &nbsp; &nbsp; {{lastName}} !</h1>
+    <app-editable-name *ngIf="update" [fullName]="profile"
+                       [onSave]="profile.fullName"
+                       [update]="update"
+                       (newFullName)="handleNewFullName($event)"
+
+    ></app-editable-name>
+    <button class="edit-button" (click)="handleNameUpdate(profile.fullName)" *ngIf="update === false">Edit Name</button>
   </div>
   <h2 class="sr-only">Accounts</h2>
   <ng-container>
