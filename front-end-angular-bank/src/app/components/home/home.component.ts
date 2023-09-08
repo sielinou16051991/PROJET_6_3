@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
 
   public home = false;
   public url = '';
+  public isLogIn: string | null | undefined;
   constructor(
     private router: Router
   ) { }
@@ -18,6 +19,11 @@ export class HomeComponent implements OnInit {
     this.home = true;
     this.url = this.router.url;
     console.log(this.url);
+    this.isLogIn = localStorage.getItem('jwtToken');
+    if (this.isLogIn) {
+      this.router.navigate(['/user']).then((res: any) => {
+        console.log(res);
+      });
+    }
   }
-
 }
