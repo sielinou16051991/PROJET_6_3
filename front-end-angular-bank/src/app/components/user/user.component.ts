@@ -29,10 +29,10 @@ export class UserComponent implements OnInit {
     fullName: 'full name'
   };
 
-  public data = {
-    email: 'steve@rogers.com',
-    password: 'password456'
-  };
+  // public data = {
+  //   email: 'steve@rogers.com',
+  //   password: 'password456'
+  // };
 
    profile$: Observable<any> | undefined;
    update = false;
@@ -53,6 +53,7 @@ export class UserComponent implements OnInit {
     this.lastName = localStorage.getItem('lastName').toUpperCase();
     this.profile$ = this.stateServiceService.userProfile$;
     this.dataAccount = data;
+
   }
 
 
