@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   public messageError = '';
   public token = '';
   public rememberMe = false;
+  public isLogIn: any;
   constructor(
     private router: Router,
     private genericsService: GenericsService,
@@ -27,6 +28,12 @@ export class SignInComponent implements OnInit {
     // }).catch((error) => {
     //   console.error(error);
     // });
+    this.isLogIn = localStorage.getItem('jwtToken');
+    if (this.isLogIn) {
+      this.router.navigate(['/user']).then((res: any) => {
+        console.log(res);
+      });
+    }
   }
 
 
@@ -82,11 +89,11 @@ export class SignInComponent implements OnInit {
           localStorage.setItem('jwtToken', this.token);  // envoi des parametres de connexion dans le localStorage
           if (this.token !== '') {
             // await dispatch(fetchUserProfile(token)).unwrap();
+            localStorage.setItem('email', this.email);
+            localStorage.setItem('password', this.password);
             this.router.navigate(['/user']);
             if (this.rememberMe) {
               localStorage.setItem('rememberMe', String(true));
-              localStorage.setItem('email', this.email);
-              localStorage.setItem('password', this.password);
             } else {
               // localStorage.removeItem('rememberMe');
               // localStorage.removeItem('email');

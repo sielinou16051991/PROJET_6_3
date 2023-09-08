@@ -3,7 +3,11 @@
   <a  *ngIf="(url === '/user')"
     class="main-nav-item" routerLink="/user">
     <i class="fa fa-user-circle"></i>
-    {{firstName}} &nbsp;&nbsp; {{lastName}}
+<!--    {{firstName}} &nbsp;&nbsp; {{lastName}}-->
+    <span *ngIf="firstName !== 'NULL' && lastName !== 'NULL'">{{firstName}} &nbsp; &nbsp; {{lastName}} !</span>
+    <span *ngIf="firstName !== 'NULL' && lastName === 'NULL'">{{firstName}} &nbsp; &nbsp;  !</span>
+    <span *ngIf="firstName === 'NULL' && lastName !== 'NULL'">&nbsp; &nbsp; {{lastName}} !</span>
+    <span *ngIf="firstName === 'NULL' && lastName === 'NULL'">&nbsp; &nbsp; !</span>
   </a>
   <button *ngIf="url != '/'"
     class="main-nav-item btn-decoration-none"

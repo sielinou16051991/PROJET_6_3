@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GenericsService} from '../../services/generics.service';
+import {LogOutModel} from '../../models/LogOutModel';
 
 @Component({
   selector: 'app-nav',
@@ -12,6 +13,8 @@ export class NavComponent implements OnInit {
   public url = '';
   @Input() firstName: any;
   @Input() lastName: any;
+  private password: string | null | undefined;
+  private email: string | null | undefined;
 
   constructor(
     public router: Router,
@@ -21,6 +24,10 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.url = this.router.url;
     console.log(this.url);
+    this.email = localStorage.getItem('email');
+    this.password = localStorage.getItem('password');
+    // console.log(localStorage.getItem('email'));
+    // console.log(localStorage.getItem('password'));
   }
 
   handelerLogOut = () => {
@@ -28,9 +35,17 @@ export class NavComponent implements OnInit {
     // @ts-ignore
     // const resp = dispatch(this.genericsService.logOut());
     // console.log(resp);
-    localStorage.removeItem('jwtToken');
-    this.router.navigate(['/']).then(r => console.log(r));
+
+    const dto = new LogOutModel(
+      this.email,
+      this.password,
+      this.firstName,
+      this.lastName,
+    );
+    console.log(dto);
     this.genericsService.logOut();
+    // localStorage.removeItem('jwtToken');
+    // this.router.navigate(['/']).then(r => console.log(r));
 
   }
   handelerSignIn = () => {

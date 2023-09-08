@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {StateServiceService} from '../../services/state-service.service';
 import {Observable} from 'rxjs';
 import {ConsoleLogger} from '@angular/compiler-cli/ngcc';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class UserComponent implements OnInit {
   public dataAccount: any;
   public lastName: any;
   public firstName: any;
+  public isLogIn: any;
   // public profile = useSelector((state) => state.user.profile);
   // public error = useSelector((state) => state.user.error);
   public profile = {
@@ -42,18 +44,25 @@ export class UserComponent implements OnInit {
     private genericsService: GenericsService,
     private store: Store<AppState>,
     private stateServiceService: StateServiceService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     // @ts-ignore
-    this.firstName = localStorage.getItem('firstName').toUpperCase();
+    this.firstName = localStorage.getItem('firstName');
     // @ts-ignore
-    this.lastName = localStorage.getItem('lastName').toUpperCase();
+    this.lastName = localStorage.getItem('lastName');
     this.profile$ = this.stateServiceService.userProfile$;
     this.dataAccount = data;
 
+    this.isLogIn = localStorage.getItem('jwtToken');
+    // if (this.isLogIn) {
+    //   this.router.navigate(['/user']).then((res: any) => {
+    //     console.log(res);
+    //   });
+    // }
   }
 
 

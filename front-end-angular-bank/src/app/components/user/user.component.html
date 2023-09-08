@@ -1,7 +1,10 @@
 <app-header [lastName]="lastName" [firstName]="firstName" ></app-header>
 <main class="main bg-dark">
   <div class="header">
-    <h1>Welcome back<br />{{firstName}} &nbsp; &nbsp; {{lastName}} !</h1>
+    <h1 *ngIf="firstName !== 'null' && lastName !== 'null'">Welcome back<br />{{firstName}} &nbsp; &nbsp; {{lastName}} !</h1>
+    <h1 *ngIf="firstName !== 'null' && lastName === 'null'">Welcome back<br />{{firstName}} &nbsp; &nbsp;  !</h1>
+    <h1 *ngIf="firstName === 'null' && lastName !== 'null'">Welcome back<br /> &nbsp; &nbsp; {{lastName}} !</h1>
+    <h1 *ngIf="firstName === 'null' && lastName === 'null'">Welcome back<br /> !</h1>
     <app-editable-name *ngIf="update" [fullName]="profile"
                        [onSave]="profile.fullName"
                        [update]="update"

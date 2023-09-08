@@ -127,20 +127,35 @@ export class GenericsService {
     }
   }
 
+  // public logOut(email: any, password: any, firstName: any, lastName: any): any {
+  //   /**
+  //    * Deconnecter l'utilisateur
+  //    */
+  //   return this.http.post(`${this.baseUrl}/user/signup`, {email, password, firstName, lastName});
+  //   // return this.http.post(`${this.baseUrl}/user/signup`, dto).subscribe((result: any) => {
+  //   //   console.log(result);
+  //   //   window.localStorage.clear();
+  //   //   this.router.navigate(['/']).then(
+  //   //     () => {
+  //   //       window.location.reload();
+  //   //     }
+  //   //   );
+  //   // }, error => {
+  //   //   console.log(error);
+  //   // });
+  // }
+
   public logOut(): any {
     /**
      * Deconnecter l'utilisateur
      */
-    return this.http.get(`${this.baseUrl}/user/signup`).subscribe((result: any) => {
-      window.localStorage.clear();
-      this.router.navigate(['/']).then(
-        () => {
-          window.location.reload();
-        }
-      );
-    }, error => {
-      console.log(error);
-    });
+    // window.localStorage.clear();
+    localStorage.removeItem('jwtToken');
+    this.router.navigate(['/']).then(
+      () => {
+        window.location.reload();
+      });
+
   }
 }
 
